@@ -9,6 +9,115 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* STILI AGGIUNTIVI PER POP-UP E MODALE PRIVACY/COOKIE */
+        
+        /* Banner Cookie in Basso */
+        .cookie-banner {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background-color: #ffffff;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+            padding: 20px;
+            z-index: 9999;
+            border-top: 3px solid #2C6E49;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .cookie-content {
+            max-width: 1140px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-text {
+            font-size: 0.9rem;
+            color: #2B2D42;
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .cookie-text a {
+            color: #FF6B35;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .cookie-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* Modale Pop-up (Privacy & Cookie Policy estesa) */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .modal-content {
+            background-color: #ffffff;
+            border-radius: 12px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #6C757D;
+            cursor: pointer;
+            border: none;
+            background: none;
+        }
+
+        .modal-close:hover {
+            color: #FF6B35;
+        }
+
+        .modal-body h3 {
+            color: #2C6E49;
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        .modal-body p, .modal-body ul {
+            font-size: 0.95rem;
+            color: #4A5568;
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+
+        .modal-body ul {
+            padding-left: 20px;
+        }
+    </style>
 </head>
 <body>
 
@@ -41,7 +150,7 @@
             </div>
             <div class="hero-image">
                 <div class="image-placeholder">
-                    <img src="FOTO V.jpg" alt="Foto di me">
+                    <img src="FOTO V.jpg" alt="Foto Dott.ssa Olimpia Pezone">
                 </div>
             </div>
         </div>
@@ -52,15 +161,14 @@
         <div class="container grid-2">
             <div class="about-image">
                 <div class="image-placeholder">
-                    <span>[Foto Studio / Lavoro]</span>
+                    <img src="biologia-molecolare.jpg" alt="Immagine Biologia Molecolare">
                 </div>
             </div>
             <div class="about-content">
                 <span class="sub-title">Chi Sono</span>
-                <h2>Dott.ssa [Nome Cognome]</h2>
+                <h2>Dott.ssa Olimpia Pezone</h2>
                 <p>Sono una Biologa Nutrizionista iscritta all'Ordine Nazionale dei Biologi. La mia missione è guidarti verso una consapevolezza alimentare lontana dalle mode del momento e priva di privazioni inutili.</p>
                 <p>Credo fortemente che la nutrizione non sia solo un conteggio calorico, ma una relazione costante tra salute, abitudini quotidiane e benessere psicofisico.</p>
-              <img src="biologia-molecolare.jpg" alt="Immagine biologia">
                 <ul class="features-list">
                     <li>✓ Laurea Magistrale in Scienze della Nutrizione</li>
                     <li>✓ Piani alimentari 100% personalizzati</li>
@@ -163,7 +271,7 @@
     <footer class="footer">
         <div class="container footer-grid">
             <div class="footer-col">
-                <a href="#" class="logo logo-footer">Dott.ssa <span>[Nome]</span></a>
+                <a href="#" class="logo logo-footer">Dott.ssa <span>Olimpia Pezone</span></a>
                 <p>Biologa Nutrizionista specializzata in percorsi di rieducazione alimentare personalizzati.</p>
             </div>
             <div class="footer-col">
@@ -178,15 +286,117 @@
                 <h4>Note Legali</h4>
                 <p>Iscrizione Ordine dei Biologi N° XX_XXXXXX</p>
                 <p>P.IVA: 01234567890</p>
-                <p><a href="#">Privacy Policy</a> | <a href="#">Cookie Policy</a></p>
+                <p>
+                    <a href="javascript:void(0)" id="open-privacy-link">Privacy Policy</a> | 
+                    <a href="javascript:void(0)" id="open-cookie-link">Cookie Policy</a>
+                </p>
             </div>
         </div>
         <div class="footer-bottom">
             <div class="container">
-                <p>&copy; 2026 Dott.ssa [Nome Cognome]. Tutti i diritti riservati.</p>
+                <p>&copy; 2026 Dott.ssa Olimpia Pezone. Tutti i diritti riservati.</p>
             </div>
         </div>
     </footer>
+
+    <!-- BANNER POP-UP COOKIES (Appare all'apertura del sito) -->
+    <div id="cookie-banner" class="cookie-banner">
+        <div class="cookie-content">
+            <div class="cookie-text">
+                Questo sito utilizza cookie tecnici e di analisi per migliorare l'esperienza di navigazione. Proseguendo la navigazione accetti il nostro utilizzo dei cookie. Leggi la nostra <a href="javascript:void(0)" onclick="openModal('cookie-modal')">Cookie Policy</a> o la <a href="javascript:void(0)" onclick="openModal('privacy-modal')">Privacy Policy</a>.
+            </div>
+            <div class="cookie-buttons">
+                <button onclick="acceptCookies()" class="btn btn-primary" style="padding: 8px 16px; font-size: 0.9rem;">Accetta Tutti</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE POP-UP PRIVACY POLICY -->
+    <div id="privacy-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('privacy-modal')">&times;</button>
+            <div class="modal-body">
+                <h2>Informativa sulla Privacy (GDPR)</h2>
+                <p><strong>Titolare del Trattamento:</strong> Dott.ssa Olimpia Pezone - Biologa Nutrizionista</p>
+                
+                <h3>1. Dati Raccolti</h3>
+                <p>Attraverso il modulo di contatto raccogliamo dati personali quali: nome, cognome, indirizzo email e numero di telefono per rispondere alle richieste di prenotazione o informazione.</p>
+                
+                <h3>2. Finalità del Trattamento</h3>
+                <p>I dati forniti spontaneamente dagli utenti saranno utilizzati esclusivamente per erogare le informazioni o i servizi richiesti relativi alle consulenze nutrizionali.</p>
+                
+                <h3>3. Conservazione dei Dati</h3>
+                <p>I dati personali saranno conservati per il tempo strettamente necessario a gestire la richiesta del cliente e in conformità con gli obblighi di legge.</p>
+                
+                <h3>4. Diritti dell'Interessato</h3>
+                <p>In ogni momento è possibile richiedere l'accesso, la modifica o la cancellazione dei propri dati inviando una comunicazione scritta tramite la sezione contatti.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALE POP-UP COOKIE POLICY ESTESA -->
+    <div id="cookie-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('cookie-modal')">&times;</button>
+            <div class="modal-body">
+                <h2>Informativa estesa sui Cookie</h2>
+                <p>I cookie sono piccoli file di testo che i siti visitati dall'utente inviano al suo terminale per essere memorizzati e poi ritrasmessi agli stessi siti alla successiva visita.</p>
+                
+                <h3>Tipologie di cookie utilizzate:</h3>
+                <ul>
+                    <li><strong>Cookie Tecnici:</strong> Necessari per il corretto funzionamento delle funzionalità base del sito web.</li>
+                    <li><strong>Cookie Analitici:</strong> Utilizzati per raccogliere informazioni in forma aggregata sul numero degli utenti e su come questi visitano il sito stesso.</li>
+                </ul>
+                
+                <h3>Gestione dei Cookie</h3>
+                <p>L'utente può disabilitare o gestire i cookie attraverso le impostazioni del proprio browser di navigazione.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT JAVASCRIPT GESTIONE POP-UP -->
+    <script>
+        // Gestione Banner Cookie
+        function acceptCookies() {
+            document.getElementById('cookie-banner').style.display = 'none';
+            localStorage.setItem('cookiesAccepted', 'true');
+        }
+
+        // Verifica se l'utente ha già accettato i cookie in precedenza
+        window.addEventListener('DOMContentLoaded', () => {
+            if (localStorage.getItem('cookiesAccepted') === 'true') {
+                document.getElementById('cookie-banner').style.display = 'none';
+            }
+        });
+
+        // Funzioni Apertura e Chiusura Modali
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Collegamento link footer alle modali
+        document.getElementById('open-privacy-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('privacy-modal');
+        });
+
+        document.getElementById('open-cookie-link').addEventListener('click', function(e) {
+            e.preventDefault();
+            openModal('cookie-modal');
+        });
+
+        // Chiusura modale cliccando fuori dal riquadro bianco
+        window.addEventListener('click', function(e) {
+            const privacyModal = document.getElementById('privacy-modal');
+            const cookieModal = document.getElementById('cookie-modal');
+            if (e.target === privacyModal) closeModal('privacy-modal');
+            if (e.target === cookieModal) closeModal('cookie-modal');
+        });
+    </script>
 
 </body>
 </html>
